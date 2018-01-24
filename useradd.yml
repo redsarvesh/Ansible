@@ -1,0 +1,7 @@
+---
+ - hosts: test
+   vars: 
+    passwd: '$6$.Zn7b/tqkeCaFroU$dwJgpRvY6h/T9NBpCchD3oeHGHGFBNyk.yk/GxNdbLnWR5NV8FsDMJFcF25hsIGhxY1Jipd6AoG5M.SixoJX8/'
+   tasks:
+    - name: creating user with password
+      user: name=adhoc password={{ passwd }}
