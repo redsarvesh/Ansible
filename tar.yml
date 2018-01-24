@@ -1,0 +1,5 @@
+---
+ - hosts: test
+   tasks:
+    - name: creating tar of a file
+      shell: tar -cvzf new.tar.gz  /root/new

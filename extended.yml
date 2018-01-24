@@ -1,0 +1,5 @@
+---
+ - hosts: test
+   tasks:
+    - name: creating partion
+      parted: device=/dev/vdb number=1 part_type=extended flags=lvm state=present part_start=1GiB

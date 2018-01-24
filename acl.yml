@@ -1,0 +1,13 @@
+---
+ - hosts: test
+   tasks:
+    - name: copying
+      copy: src=/etc/fstab dest=/var/tmp/fstab
+    - name: adding user harry
+      user: name=harry
+    - name: adding user natasha
+      user: name=natasha
+    - name: granting permission to natasha
+      acl: name=/var/tmp/fstab entity=natasha etype=user permissions="rw" state=present
+    - name: granting permission to harry
+      acl: name=/var/tmp/fstab entity=harry etype=user permissions="---" state=present
