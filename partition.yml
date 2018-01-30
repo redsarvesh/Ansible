@@ -1,0 +1,5 @@
+---
+ - hosts: all
+   tasks: 
+    - name: partitioning of disk
+      parted: device=/dev/vda  number=3 state=present part_start=10659840s part_type=extended
