@@ -1,0 +1,9 @@
+---
+ - hosts: test
+   tasks:
+    - name: installing mariadb
+      yum: name=mariadb-server state=present
+    - name: restarting and enabling
+      service: name=mariadb state=restarted enabled=yes
+    - name: creating database db
+      mysql_db: name=db state=present
