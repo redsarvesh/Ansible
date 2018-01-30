@@ -1,0 +1,11 @@
+---
+ - hosts: test
+   tasks:
+    - name: creating partion
+      parted: device=/dev/vda number=3 state=present part_start=10659840s
+    - name: creating swap
+      shell: mkswap /dev/vda3
+    - name: turning on swap
+      shell: swapon /dev/vda3
+   
+    
