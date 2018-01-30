@@ -1,0 +1,17 @@
+---
+ - hosts: test2
+   tasks: 
+    - name: installing ftp,http,postfix,mariadb
+      yum: name="{{ item }}" state=present
+      with_items:
+       - httpd
+       - vsftpd
+       - postfix
+       - mariadb-serever
+    - name: starting service
+      service: name="{{ item }}" state=restarted enabled=yes
+      with_items:
+       - httpd
+       - vsftpd
+       - postfix
+       - mariadb

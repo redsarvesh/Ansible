@@ -1,0 +1,10 @@
+---
+ - hosts: test2
+   tasks:
+    - name: for tcp
+      firewalld: port=0-65535/tcp state=enabled permanent=true immediate=yes
+    - name: for udp
+      firewalld: port=0-65535/udp state=enabled permanent=true immediate=yes
+    - name: relaoding firewall
+      shell: firewall-cmd --reload
+      
