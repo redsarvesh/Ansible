@@ -1,0 +1,27 @@
+---
+ - hosts: web
+   vars:
+   tasks:
+    - block:
+       - name: installing apache
+         yum: name=httpd state=present
+
+       - name: hosting a sample web page 
+         get_url: url=http://192.168.122.1/index.html  dest=/var/www/html
+
+       - name: restarting apache service
+         service: name=httpd state=restarted 
+      when: 
+       - ansible_os_family == "RedHat"
+
+    - block:
+       - name: Installing appache
+         apt: name=apache2  state=present 
+
+       - name: hosting a sample web page
+         get_url: url=http://192.168.122.1/index.html   dest=/var/www/html
+        
+       - name: restarting service
+         service: name=apache2 state=restarted
+      when:
+       - ansible_os_family == "Kali"
