@@ -1,0 +1,11 @@
+---
+ - hosts: test
+   tasks: 
+    - name: creating pv1
+      shell: pvcreate /dev/vde warn=false
+    - name: creating pv2
+      shell: pvcreate /dev/vdf warn=false
+    - name: creating vg
+      shell: vgcreate -s 16M home /dev/vde /dev/vdf warn=false
+    - name: creating lv
+      shell: lvcreate --name wgroup --size 300M home warn=false 

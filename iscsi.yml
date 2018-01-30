@@ -1,0 +1,31 @@
+---
+ - name: operations performed on serverside
+   hosts: server
+   tasks: 
+    - name: installing targetcli
+      yum: name=targetcli state=present
+    - name: restarting and enabling service
+      service: name=target state=restarted enabled=yes
+    - name: creating backstore
+      shell: targetcli /backstores/block  create name=hdd dev=/dev/vdb
+    - name: creating iscsi
+      shell: targetcli /iscsi create wwn=iqn.1994-05.redhat.com:hdd
+    - name: creating luns
+      shell: targetcli /iscsi/iqn.1994-05.redhat.com:hdd/tpg1/luns create /backstores/block/hdd
+    - name: creating acls
+      shell: targetcli /iscsi/iqn.1994-05.redhat.com:hdd/tpg1/acls create wwn=iqn.1994-05.com.redhat:abe33958811
+
+
+ - name: operations performed on client-side
+   hosts: client
+   tasks:
+    - name: iptables -F
+      shell: iptables -F
+
+    
+    - name: discovering iscsi-target
+      open_iscsi: show_nodes=yes  portal=192.168.122.39 discover=yes 
+                        
+    - name: login
+      open_iscsi: login=yes target=iqn.1994-05.redhat.com:hdd
+
