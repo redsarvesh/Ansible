@@ -1,0 +1,12 @@
+---
+ - hosts: test
+   tasks: 
+   - name: resizing lvm
+     command: lvextend --size +100M /dev/father/son
+   - name: creating directory
+     file: path=/mnt/fath state=directory mode=0755
+   - name: mounting
+     mount: name=/dev/father/son src=/mnt/fath fstype=xfs state=present
+   - name: formatting
+     command: xfs_growfs /dev/father/son
+   
