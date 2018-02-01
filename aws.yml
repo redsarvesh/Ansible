@@ -1,0 +1,12 @@
+---
+ - hosts: localhost
+   tasks:
+    - name: starting vm in aws
+      ec2:
+       region: ap-south-1
+       key_name: sir
+       instance_type: t2.micro
+       image:  ami-e60e5a89
+       wait: yes
+       count: 1
+       
